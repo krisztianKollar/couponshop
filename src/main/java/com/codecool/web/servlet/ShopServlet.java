@@ -39,8 +39,6 @@ public final class ShopServlet extends AbstractServlet {
             User user = (User) req.getSession().getAttribute("user");
             int shopId = shop.getId();
             int userId = user.getId();
-//            System.out.println(shopId);
-//            System.out.println(userId);
             List<Coupon> coupons = couponService.getCouponsForUser(userId, shopId);
             req.setAttribute("coupons", coupons);
             req.setAttribute("shop", shop);

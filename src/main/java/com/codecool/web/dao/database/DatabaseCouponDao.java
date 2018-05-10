@@ -32,10 +32,10 @@ public final class DatabaseCouponDao extends AbstractDao implements CouponDao {
         System.out.println(userId + "; " + shopId);
         String sql = "SELECT id, name, percentage " +
                 "FROM coupons as c " +
-                "join coupons_shops_users as csu " +
-                "on c.id = csu.coupon_id " +
-                "where csu.user_id = ? " +
-                "and csu.shop_id = ?";
+                "join coupons_shops as cs " +
+                "on c.id = cs.coupon_id " +
+                "where c.user_id = ? " +
+                "and cs.shop_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, userId);
                 statement.setInt(2, shopId);
@@ -92,7 +92,7 @@ public final class DatabaseCouponDao extends AbstractDao implements CouponDao {
         boolean autoCommit = connection.getAutoCommit();
         connection.setAutoCommit(false);
         String sql = "INSERT INTO coupons_shops (coupon_id, shop_id) VALUES (?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, couponId);
             for (int shopId : shopIds) {
                 statement.setInt(2, shopId);

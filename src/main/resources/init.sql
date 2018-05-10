@@ -1,7 +1,7 @@
 /*
     Database initialization script that runs on every web-application redeployment.
 */
-DROP TABLE IF EXISTS coupons_shops_users CASCADE;
+DROP TABLE IF EXISTS coupons_shops CASCADE;
 DROP TABLE IF EXISTS coupons CASCADE;
 DROP TABLE IF EXISTS shops CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
@@ -30,14 +30,12 @@ CREATE TABLE coupons (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE coupons_shops_users (
+CREATE TABLE coupons_shops (
     coupon_id INTEGER,
     shop_id INTEGER,
-    user_id INTEGER,
-    PRIMARY KEY (coupon_id, shop_id, user_id),
+    PRIMARY KEY (coupon_id, shop_id),
     FOREIGN KEY (coupon_id) REFERENCES coupons(id),
-    FOREIGN KEY (shop_id) REFERENCES shops(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (shop_id) REFERENCES shops(id)
 );
 
 INSERT INTO users (email, password) VALUES
@@ -59,17 +57,17 @@ INSERT INTO coupons (name, percentage, user_id) VALUES
 	('20% off from EVERYTHING!', 20, 3),   -- 4
 	('1 product for FREE!', 100, 3);       -- 5
 
-INSERT INTO coupons_shops_users (coupon_id, shop_id, user_id) VALUES
-    (1, 1, 1), -- 1
-    (1, 2, 1),
-    (1, 3, 1),
-    (2, 1, 1), -- 2
-    (2, 2, 1),
-    (2, 3, 1),
-    (2, 5, 1),
-    (3, 1, 3), -- 3
-    (3, 2, 3),
-    (3, 5, 3),
-    (4, 3, 3), -- 4
-    (5, 2, 3), -- 5
-    (5, 5, 3);
+INSERT INTO coupons_shops (coupon_id, shop_id) VALUES
+    (1, 1), -- 1
+    (1, 2),
+    (1, 3),
+    (2, 1), -- 2
+    (2, 2),
+    (2, 3),
+    (2, 5),
+    (3, 1), -- 3
+    (3, 2),
+    (3, 5),
+    (4, 3), -- 4
+    (5, 2), -- 5
+    (5, 5);

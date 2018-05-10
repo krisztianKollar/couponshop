@@ -63,9 +63,9 @@ public final class WebappContextListener implements ServletContextListener {
         */
         try (Connection connection = dataSource.getConnection()) {
             ScriptUtils.executeSqlScript(connection, new ClassPathResource(resource));
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw new IllegalStateException(ex);
+        } catch (Throwable t) {
+            t.printStackTrace();
+            throw new IllegalStateException(t);
         }
         /*
             Doing this is basically it's equivalent to this
