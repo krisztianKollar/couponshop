@@ -16,20 +16,13 @@
     </tr>
     </thead>
     <tbody>
-    <c:choose>
-        <c:when test="${coupons.size() == 0}">
-            You have no coupons yet.
-            <br><br />
-        </c:when>
-        <c:otherwise>
-            <ul>
-                <c:forEach var="coupon" items="${coupons}">
-                     <li><a href="coupon?id=<c:out value="${coupon.id}"/>">${coupon.name}</a></li>
-                </c:forEach>
-            </ul>
-
-        </c:otherwise>
-    </c:choose>
+    <c:forEach var="coupon" items="${coupons}">
+        <tr>
+            <td>${coupon.id}</td>
+            <td><a href="coupon?id=<c:out value="${coupon.id}"/>">${coupon.name}</a></td>
+            <td>${coupon.percentage}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 <h2>Add new coupon</h2>
