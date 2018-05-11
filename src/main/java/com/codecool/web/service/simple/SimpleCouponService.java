@@ -28,6 +28,9 @@ public final class SimpleCouponService implements CouponService {
     public List<Coupon> getCouponsForUser(int userId, int shopId) throws SQLException {
         return couponDao.findAllForUser(userId, shopId);
     }
+    public List<Coupon> getCouponsForUser(int userId) throws SQLException {
+        return couponDao.findAllForUser(userId);
+    }
 
     @Override
     public Coupon getCoupon(String id) throws SQLException, ServiceException {

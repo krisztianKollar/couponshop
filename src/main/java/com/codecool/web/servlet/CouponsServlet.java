@@ -28,8 +28,9 @@ public final class CouponsServlet extends AbstractServlet {
             CouponDao couponDao = new DatabaseCouponDao(connection);
             ShopDao shopDao = new DatabaseShopDao(connection);
             CouponService couponService = new SimpleCouponService(couponDao, shopDao);
-
-            List<Coupon> coupons = couponService.getCoupons();
+            User user = (User) req.getSession().getAttribute("user");
+            int userId = user.getId();
+            List<Coupon> coupons = couponService.getCouponsForUser(userId);
 
             req.setAttribute("coupons", coupons);
             req.getRequestDispatcher("coupons.jsp").forward(req, resp);
