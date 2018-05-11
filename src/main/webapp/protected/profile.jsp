@@ -10,12 +10,20 @@
 <p>Email: <c:out value="${user.email}"/></p>
 <p>Password: <c:out value="${user.password}"/></p>
 <h2>Coupons</h2>
+<c:choose>
+    <c:when test="${coupons.size() == 0}">
+        You have no coupons yet.
+        <br />
+    </c:when>
+    <c:otherwise>
+        <ul>
+            <c:forEach var="coupon" items="${coupons}">
+                 <li><a href="coupon?id=<c:out value="${coupon.id}"/>">${coupon.name}</a></li>
+            </c:forEach>
+        </ul>
 
-<ul>
-    <c:forEach var="coupon" items="${coupons}">
-         <li><a href="coupon?id=<c:out value="${coupon.id}"/>">${coupon.name}</a></li>
-    </c:forEach>
-</ul>
+    </c:otherwise>
+</c:choose>
 
 <h2>Links</h2>
 <ul>
